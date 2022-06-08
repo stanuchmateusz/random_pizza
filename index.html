@@ -8,17 +8,31 @@
     <title>Random pizza</title>
 </head>
 <script>
-    fetch('https://api.imgur.com/3/gallery/r/pizza/top/month')
+    fetch('https://api.imgur.com/3/gallery/r/pizza/top/month', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Client-ID 2066dd9c106e48c'
+        }
+    }
+    )
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            // document.getElementById('pizza').innerHTML = data.name;
+            let rand_post = data.data[Math.floor(Math.random() * data.data.length)];
+            console.log(rand_post);
+            if (rand_post.images)
+                rand_img = rand_post.images[0].link
+            else
+                rand_img = rand_post.link;
+
+            console.log(rand_img);
+            document.getElementById('pizza').innerHTML = rand_img;
+            // window.location.href = rand_img.link;
         })
         .catch(error => console.error(error));
 </script>
 
 <body>
-    <img id="pizza" src="" alt="Pizza image">
+    <span id="pizza"></span>
 </body>
 
 </html>
