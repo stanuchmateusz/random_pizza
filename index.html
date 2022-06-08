@@ -8,11 +8,17 @@
     <title>Random pizza</title>
 </head>
 <script>
-    //https://api.imgur.com/3/gallery/r/pizza/top/month
+    fetch('https://api.imgur.com/3/gallery/r/pizza/top/month')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // document.getElementById('pizza').innerHTML = data.name;
+        })
+        .catch(error => console.error(error));
 </script>
 
 <body>
-
+    <img id="pizza" src="" alt="Pizza image">
 </body>
 
 </html>
